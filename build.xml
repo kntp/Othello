@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project name="Othello" default="default">
+  <target name="default">
+    <javac srcdir="./src/othellogame" destdir="./bin/othellogame" />
+  </target>
+</project>
