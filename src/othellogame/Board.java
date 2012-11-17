@@ -23,6 +23,9 @@ public class Board {
 		clearBoard();
 	}
 
+	/**
+	 *　板の上をゲーム開始の状態にする
+	 */
 	public void initBoard(){
 		clearBoard();
 		
@@ -34,6 +37,13 @@ public class Board {
 		clearBoard();
 	}
 	
+	/**
+	 *　石を置く
+	 * @param x x座標
+	 * @param y y座標
+	 * @param color 置く石の色
+	 * @return 置ける　true　置けない　false
+	 */
 	public boolean putpiece(int x, int y, int color){
 		boolean ret = true;
 		
