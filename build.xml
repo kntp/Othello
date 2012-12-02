@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
-<project name="Othello" default="default">
-  <target name="default">
-    <javac srcdir="./src/othellogame" destdir="./bin/othellogame" />
+<project name="Othello" default="compile">
+  <property name="src.dir" value="./src/othellogame" />
+  <property name="bin.dir" value="./bin/othellogame" />
+
+  <target name="init">
+    <mkdir dir="${bin.dir}" />
+  </target>
+
+    <target name="compile" depends="init">
+    <javac includeAntRuntime="true" srcdir="${src.dir}" destdir="${bin.dir}" />
   </target>
 </project>
