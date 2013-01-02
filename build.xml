@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
 <project name="Othello" default="compile">
-  <property name="src.dir" value="./src/othellogame" />
-  <property name="bin.dir" value="./bin/othellogame" />
+	<property name="src.dir" value="./src" />
+	<property name="tst.dir" value="./tst" />
+	<property name="bin.dir" value="./bin" />
 
-  <target name="init">
-    <mkdir dir="${bin.dir}" />
-  </target>
+	<target name="init">
+		<mkdir dir="${bin.dir}" />
+	</target>
 
-    <target name="compile" depends="init">
-    <javac includeAntRuntime="true" srcdir="${src.dir}" destdir="${bin.dir}" />
-  </target>
+	<target name="compile" depends="init">
+		<javac destdir="${bin.dir}">
+			<src path="${src.dir}"/>
+			<src path="${tst.dir}"/>
+		</javac>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${bin.dir}"/>
+	</target>
 </project>
