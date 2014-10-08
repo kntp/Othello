@@ -9,7 +9,7 @@ public class Board {
 
 	private void clearBoard(){
 		int x, y;
-		
+
 		for(x = 0; x < BOARD_SIZE; x++){
 			for(y = 0; y < BOARD_SIZE; y++){
 				cell[x][y] = COLOR_NONE;
@@ -18,7 +18,7 @@ public class Board {
 
 		return;
 	}
-	
+
 	public Board(){
 		clearBoard();
 	}
@@ -28,15 +28,15 @@ public class Board {
 	 */
 	public void initBoard(){
 		clearBoard();
-		
+
 		cell[3][3] = cell[4][4] = COLOR_WHITE;	//initial white piece
 		cell[3][4] = cell[4][3] = COLOR_BLACK;	//initial black piece
 	}
-	
+
 	public void teClear(){
 		clearBoard();
 	}
-	
+
 	/**
 	 *　石を置く
 	 * @param x x座標
@@ -46,7 +46,7 @@ public class Board {
 	 */
 	public boolean putpiece(int x, int y, int color){
 		boolean ret = true;
-		
+
 		if((x >= BOARD_SIZE)||(y >= BOARD_SIZE)) {
 			ret = false;
 		}else if((cell[x][y] == COLOR_BLACK)||(cell[x][y] == COLOR_WHITE)){
@@ -54,29 +54,36 @@ public class Board {
 		}else{
 			cell[x][y] = color;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public int getval(int x, int y) {
 		int ret;
-		
+
 		if(x < 0 || y < 0 || x > BOARD_SIZE - 1 || y > BOARD_SIZE - 1){
 			ret = -1;
 		}else {
 			ret = cell[x][y];
 		}
-		
+
 		return ret;
 	}
-	
+
+	/**
+	 *　石が置けるか調べる
+	 * @param x x座標
+	 * @param y y座標
+	 * @param color 置く石の色
+	 * @return 置ける　true　置けない　false
+	 */
 	public boolean checklocation(int x, int y, int side){
 		return false;
 	}
-	
+
 	public void show(){
 		int x, y;
-		
+
 		System.out.println("  abcdefgh");
 		System.out.println(" +--------+");
 		for(y = 0; y < BOARD_SIZE; y++){
@@ -101,6 +108,10 @@ public class Board {
 		}
 		System.out.println(" +--------+");
 		System.out.println("\n");
+	}
+
+	public boolean isExist(int x, int y) {
+		return false;
 	}
 
 }
