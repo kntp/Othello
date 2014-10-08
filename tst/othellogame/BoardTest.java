@@ -1,9 +1,12 @@
 package othellogame;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class BoardTest extends TestCase {
+import org.junit.Test;
 
+public class BoardTest {
+
+	@Test
 	public void testBoardInit(){
 		Board bd = new Board();
 		int x, y;
@@ -26,6 +29,7 @@ public class BoardTest extends TestCase {
 		
 	}
 	
+	@Test
 	public void testGetval(){
 		Board bd = new Board();
 		
@@ -37,6 +41,7 @@ public class BoardTest extends TestCase {
 
 	}
 
+	@Test
 	public void testPutpieces(){
 		Board bd = new Board();
 		int x,y;
@@ -82,6 +87,7 @@ public class BoardTest extends TestCase {
 		assertFalse(bd.putpiece(8, 0, Board.COLOR_WHITE));
 	}
 	
+	@Test
 	public void testCheckLocation(){
 		Board bd = new Board();
 		
@@ -140,6 +146,7 @@ public class BoardTest extends TestCase {
 
 }
 
+	@Test
 	public void testShow(){
 		Board bd = new Board();
 		
