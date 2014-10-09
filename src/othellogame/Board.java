@@ -19,12 +19,20 @@ public class Board {
 		return;
 	}
 
+	private boolean is_valid(int x, int y){
+		if(x < 0 || y < 0 || x > BOARD_SIZE - 1 || y > BOARD_SIZE - 1){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public Board(){
 		clearBoard();
 	}
 
 	/**
-	 *@”Â‚Ìã‚ğƒQ[ƒ€ŠJn‚Ìó‘Ô‚É‚·‚é
+	 *ï¿½@ï¿½Â‚Ìï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Jï¿½nï¿½Ìï¿½Ô‚É‚ï¿½ï¿½ï¿½
 	 */
 	public void initBoard(){
 		clearBoard();
@@ -38,16 +46,16 @@ public class Board {
 	}
 
 	/**
-	 *@Î‚ğ’u‚­
-	 * @param x xÀ•W
-	 * @param y yÀ•W
-	 * @param color ’u‚­Î‚ÌF
-	 * @return ’u‚¯‚é@true@’u‚¯‚È‚¢@false
+	 *ï¿½@ï¿½Î‚ï¿½uï¿½ï¿½
+	 * @param x xï¿½ï¿½ï¿½W
+	 * @param y yï¿½ï¿½ï¿½W
+	 * @param color ï¿½uï¿½ï¿½ï¿½Î‚ÌF
+	 * @return ï¿½uï¿½ï¿½ï¿½ï¿½@trueï¿½@ï¿½uï¿½ï¿½ï¿½È‚ï¿½ï¿½@false
 	 */
 	public boolean putpiece(int x, int y, int color){
 		boolean ret = true;
 
-		if((x >= BOARD_SIZE)||(y >= BOARD_SIZE)) {
+		if(is_valid(x, y) == false) {
 			ret = false;
 		}else if((cell[x][y] == COLOR_BLACK)||(cell[x][y] == COLOR_WHITE)){
 			ret = false;
@@ -61,7 +69,7 @@ public class Board {
 	public int getval(int x, int y) {
 		int ret;
 
-		if(x < 0 || y < 0 || x > BOARD_SIZE - 1 || y > BOARD_SIZE - 1){
+		if(is_valid(x, y) == false) {
 			ret = -1;
 		}else {
 			ret = cell[x][y];
@@ -71,14 +79,18 @@ public class Board {
 	}
 
 	/**
-	 *@Î‚ª’u‚¯‚é‚©’²‚×‚é
-	 * @param x xÀ•W
-	 * @param y yÀ•W
-	 * @param color ’u‚­Î‚ÌF
-	 * @return ’u‚¯‚é@true@’u‚¯‚È‚¢@false
+	 *ï¿½@ï¿½Î‚ï¿½ï¿½uï¿½ï¿½ï¿½é‚©ï¿½ï¿½ï¿½×‚ï¿½
+	 * @param x xï¿½ï¿½ï¿½W
+	 * @param y yï¿½ï¿½ï¿½W
+	 * @param color ï¿½uï¿½ï¿½ï¿½Î‚ÌF
+	 * @return ï¿½uï¿½ï¿½ï¿½ï¿½@trueï¿½@ï¿½uï¿½ï¿½ï¿½È‚ï¿½ï¿½@false
 	 */
 	public boolean checklocation(int x, int y, int side){
-		return false;
+		if(is_valid(x, y) == false) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	public void show(){
@@ -111,7 +123,14 @@ public class Board {
 	}
 
 	public boolean isExist(int x, int y) {
-		return false;
-	}
+		if(is_valid(x, y) == false) {
+			return false;
+		}
 
+		if((cell[x][y] == COLOR_BLACK)||(cell[x][y] == COLOR_WHITE)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
