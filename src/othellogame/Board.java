@@ -32,7 +32,7 @@ public class Board {
 	}
 
 	/**
-	 *�@�̏���Q�[���J�n�̏�Ԃɂ���
+	 *　板の上をゲーム開始の状態にする
 	 */
 	public void initBoard(){
 		clearBoard();
@@ -46,11 +46,11 @@ public class Board {
 	}
 
 	/**
-	 *�@�΂�u��
-	 * @param x x���W
-	 * @param y y���W
-	 * @param color �u���΂̐F
-	 * @return �u����@true�@�u���Ȃ��@false
+	 *　石を置く
+	 * @param x x座標
+	 * @param y y座標
+	 * @param color 置く石の色
+	 * @return 置ける　true　置けない　false
 	 */
 	public boolean putpiece(int x, int y, int color){
 		boolean ret = true;
@@ -79,11 +79,11 @@ public class Board {
 	}
 
 	/**
-	 *�@�΂��u���邩���ׂ�
-	 * @param x x���W
-	 * @param y y���W
-	 * @param color �u���΂̐F
-	 * @return �u����@true�@�u���Ȃ��@false
+	 *　石が置けるか調べる
+	 * @param x x座標
+	 * @param y y座標
+	 * @param color 置く石の色
+	 * @return 置ける　true　置けない　false
 	 */
 	public boolean checklocation(int x, int y, int side){
 		if(is_valid(x, y) == false) {
