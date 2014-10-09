@@ -94,8 +94,34 @@ public class BoardTest {
 
 		bd.initBoard();
 
+		/* test corners */
 		assertFalse(bd.isExist(0, 0));
+		assertFalse(bd.isExist(7, 0));
+		assertFalse(bd.isExist(0, 7));
+		assertFalse(bd.isExist(7, 7));
 
+		/* test out of range */
+		assertFalse(bd.isExist(-1, -1));
+	
+		/* test center */
+		assertTrue(bd.isExist(3, 3));
+		assertTrue(bd.isExist(3, 4));
+		assertTrue(bd.isExist(4, 3));
+		assertTrue(bd.isExist(4, 4));
+		bd.teClear(); /* now, clean up the board */
+		assertFalse(bd.isExist(3, 3));
+		assertFalse(bd.isExist(3, 4));
+		assertFalse(bd.isExist(4, 3));
+		assertFalse(bd.isExist(4, 4));
+		
+		/* at random */
+		assertFalse(bd.isExist(5, 1));
+		bd.putpiece(5, 1, Board.COLOR_BLACK);
+		assertTrue(bd.isExist(5, 1));
+		
+		assertFalse(bd.isExist(2, 6));
+		bd.putpiece(2, 6, Board.COLOR_WHITE);
+		assertTrue(bd.isExist(2, 6));
 	}
 
 	@Ignore("not ready yet")
