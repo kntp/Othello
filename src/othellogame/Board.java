@@ -7,11 +7,11 @@ public class Board {
 	public static final int BOARD_SIZE = 8;
 	private int[][] cell = new int[BOARD_SIZE][BOARD_SIZE];
 
-	private void clearBoard(){
+	private void clear_board(){
 		int x, y;
 
-		for(x = 0; x < BOARD_SIZE; x++){
-			for(y = 0; y < BOARD_SIZE; y++){
+		for(y = 0; y < BOARD_SIZE; y++){
+			for(x = 0; x < BOARD_SIZE; x++){
 				cell[x][y] = COLOR_NONE;
 			}
 		}
@@ -28,21 +28,21 @@ public class Board {
 	}
 	
 	public Board(){
-		clearBoard();
+		clear_board();
 	}
 
 	/**
 	 *　板の上をゲーム開始の状態にする
 	 */
 	public void initBoard(){
-		clearBoard();
+		clear_board();
 
 		cell[3][3] = cell[4][4] = COLOR_WHITE;	//initial white piece
 		cell[3][4] = cell[4][3] = COLOR_BLACK;	//initial black piece
 	}
 
-	public void teClear(){
-		clearBoard();
+	public void tableClear(){
+		clear_board();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class Board {
 	 * @param color 置く石の色
 	 * @return 置ける　true　置けない　false
 	 */
-	public boolean putpiece(int x, int y, int color){
+	public boolean putPiece(int x, int y, int color){
 		boolean ret = true;
 
 		if(is_valid(x, y) == false) {
@@ -66,7 +66,13 @@ public class Board {
 		return ret;
 	}
 
-	public int getval(int x, int y) {
+	/**
+	 *　値を調べる
+	 * @param x x座標
+	 * @param y y座標
+	 * @return 値
+	 */
+	public int getVal(int x, int y) {
 		int ret;
 
 		if(is_valid(x, y) == false) {
@@ -85,7 +91,7 @@ public class Board {
 	 * @param color 置く石の色
 	 * @return 置ける　true　置けない　false
 	 */
-	public boolean checklocation(int x, int y, int side){
+	public boolean isPuttable(int x, int y, int side){
 		if(is_valid(x, y) == false) {
 			return false;
 		}else {
@@ -93,6 +99,9 @@ public class Board {
 		}
 	}
 
+	/**
+	 *　以下はデバッグ用
+	 */
 	public void show(){
 		int x, y;
 
@@ -132,5 +141,31 @@ public class Board {
 		}else {
 			return false;
 		}
+	}
+
+	public String getBoardData() {
+		String boardState = new String();
+		int x, y;
+		
+		for(y = 0; y < BOARD_SIZE; y++){
+			for(x = 0; x < BOARD_SIZE; x++){
+				switch(cell[x][y]) {
+				case COLOR_NONE:
+					boardState += "0";
+					break;
+				case COLOR_BLACK:
+					boardState += "1";
+					break;
+				case COLOR_WHITE:
+					boardState += "2";
+					break;
+				default:
+					boardState += "X";
+					break;
+				}
+			}
+		}
+		
+		return boardState;
 	}
 }
