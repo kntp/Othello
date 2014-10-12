@@ -41,7 +41,7 @@ public class Board {
 		cell[3][4] = cell[4][3] = COLOR_BLACK;	//initial black piece
 	}
 
-	public void tableClear(){
+	public void clearTable(){
 		clear_board();
 	}
 

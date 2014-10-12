@@ -47,42 +47,29 @@ public class BoardTest {
 		Board bd = new Board();
 		int x,y;
 
-		bd.initBoard();
-		for(x = 0; x < Board.BOARD_SIZE; x++){
-			for(y = 0; y < Board.BOARD_SIZE; y++){
-				if(((x == 3) && (y == 4))||((x == 4) && (y == 3))||((x == 3) && (y == 3))||((x == 4) && (y == 4))){
-					assertFalse(bd.putPiece(x, y, Board.COLOR_BLACK));
-					assertEquals(bd.getVal(3, 4),Board.COLOR_BLACK);
-					assertEquals(bd.getVal(4, 3),Board.COLOR_BLACK);
-					assertEquals(bd.getVal(3, 3),Board.COLOR_WHITE);
-					assertEquals(bd.getVal(4, 4),Board.COLOR_WHITE);
-				}else{
-					bd.putPiece(x, y, Board.COLOR_BLACK);
-					assertEquals(bd.getVal(x, y),Board.COLOR_BLACK);
-				}
+		/* put black test */
+		bd.clearTable();
+		for(y = 0; y < Board.BOARD_SIZE; y++){
+			for(x = 0; x < Board.BOARD_SIZE; x++){
+				bd.putPiece(x, y, Board.COLOR_BLACK);
+				assertEquals(bd.getVal(x, y),Board.COLOR_BLACK);
 			}
 		}
-		/*bd.show();*/
-		bd.initBoard();
-		for(x = 0; x < Board.BOARD_SIZE; x++){
-			for(y = 0; y < Board.BOARD_SIZE; y++){
-				if(((x == 3) && (y == 4))||((x == 4) && (y == 3))||((x == 3) && (y == 3))||((x == 4) && (y == 4))){
-					assertFalse(bd.putPiece(x, y, Board.COLOR_WHITE));
-					assertEquals(bd.getVal(3, 4),Board.COLOR_BLACK);
-					assertEquals(bd.getVal(4, 3),Board.COLOR_BLACK);
-					assertEquals(bd.getVal(3, 3),Board.COLOR_WHITE);
-					assertEquals(bd.getVal(4, 4),Board.COLOR_WHITE);
-				}else{
-					assertTrue(bd.putPiece(x, y, Board.COLOR_WHITE));
-					assertEquals(bd.getVal(x, y), Board.COLOR_WHITE);
-				}
+		
+		/* put white test*/
+		bd.clearTable();
+		for(y = 0; y < Board.BOARD_SIZE; y++){
+			for(x = 0; x < Board.BOARD_SIZE; x++){
+				assertTrue(bd.putPiece(x, y, Board.COLOR_WHITE));
+				assertEquals(bd.getVal(x, y), Board.COLOR_WHITE);
 			}
 		}
-		/*bd.show();*/
+		
+		/* out of range test*/
 		bd.initBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_BLACK));
 		assertFalse(bd.putPiece(8, 0, Board.COLOR_BLACK));
-		/*bd.show();*/
+
 		bd.initBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_WHITE));
 		assertFalse(bd.putPiece(8, 0, Board.COLOR_WHITE));
@@ -108,7 +95,7 @@ public class BoardTest {
 		assertTrue(bd.isExist(3, 4));
 		assertTrue(bd.isExist(4, 3));
 		assertTrue(bd.isExist(4, 4));
-		bd.tableClear(); /* now, clean up the board */
+		bd.clearTable(); /* now, clean up the board */
 		assertFalse(bd.isExist(3, 3));
 		assertFalse(bd.isExist(3, 4));
 		assertFalse(bd.isExist(4, 3));
@@ -124,65 +111,26 @@ public class BoardTest {
 		assertTrue(bd.isExist(2, 6));
 	}
 
-	@Ignore("not ready yet")
+//	@Ignore("not ready yet")
 	@Test
 	public void testIsPuttable(){
 		Board bd = new Board();
 
-		bd.initBoard();
+		/* clean test */
+		for(int y = 0; y < Board.BOARD_SIZE; y++) {
+			for(int x = 0; x < Board.BOARD_SIZE; x++) {
+				assertTrue(bd.isPuttable(x, y, Board.COLOR_BLACK));
+				assertTrue(bd.isPuttable(x, y, Board.COLOR_WHITE));
+			}
+		}
+		
+		bd.show();
+		
+/*		bd.initBoard();
 		assertFalse(bd.isPuttable(0, 0, Board.COLOR_BLACK));
 		assertFalse(bd.isPuttable(0, 0, Board.COLOR_WHITE));
-
-		assertFalse(bd.isPuttable(0, 8, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(8, 0, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(0, 8, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(8, 0, Board.COLOR_WHITE));
-
-		assertFalse(bd.isPuttable(2, 2, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(2, 3, Board.COLOR_BLACK));
-		assertTrue(bd.isPuttable(2, 4, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(2, 5, Board.COLOR_BLACK));
-
-		assertFalse(bd.isPuttable(2, 2, Board.COLOR_WHITE));
-		assertTrue(bd.isPuttable(2, 3, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(2, 4, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(2, 5, Board.COLOR_WHITE));
-
-		assertFalse(bd.isPuttable(3, 2, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(3, 3, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(3, 4, Board.COLOR_BLACK));
-		assertTrue(bd.isPuttable(3, 5, Board.COLOR_BLACK));
-
-		assertTrue(bd.isPuttable(3, 2, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(3, 3, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(3, 4, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(3, 5, Board.COLOR_WHITE));
-
-		assertTrue(bd.isPuttable(4, 2, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(4, 3, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(4, 4, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(4, 5, Board.COLOR_BLACK));
-
-		assertTrue(bd.isPuttable(4, 2, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(4, 3, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(4, 4, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(4, 5, Board.COLOR_WHITE));
-
-		assertFalse(bd.isPuttable(5, 2, Board.COLOR_BLACK));
-		assertTrue(bd.isPuttable(5, 3, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(5, 4, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(5, 5, Board.COLOR_BLACK));
-
-		assertFalse(bd.isPuttable(5, 2, Board.COLOR_WHITE));
-		assertTrue(bd.isPuttable(5, 3, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(5, 4, Board.COLOR_WHITE));
-		assertFalse(bd.isPuttable(5, 5, Board.COLOR_WHITE));
-
-		bd.tableClear();
-
-		bd.putPiece(3, 3, Board.COLOR_BLACK);
-
-}
+*/
+	}
 
 	@Ignore
 	@Test
@@ -214,7 +162,7 @@ public class BoardTest {
 		assertTrue(src.equals(dst));
 		
 		/* test 1 piece */
-		bd.tableClear();
+		bd.clearTable();
 		bd.putPiece(0, 0, Board.COLOR_BLACK);
 
 		src =	"10000000" +
@@ -243,7 +191,7 @@ public class BoardTest {
 		assertTrue(src.equals(dst));
 		
 		/* test 1 piece */
-		bd.tableClear();
+		bd.clearTable();
 		bd.putPiece(1, 0, Board.COLOR_WHITE);
 
 		src =	"02000000" +
