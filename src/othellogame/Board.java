@@ -5,21 +5,21 @@ public class Board {
 	public static final int COLOR_BLACK = 1;
 	public static final int COLOR_WHITE = 2;
 	public static final int BOARD_SIZE = 8;
-	private int[][] cell = new int[BOARD_SIZE][BOARD_SIZE];
+	private int[][] table = new int[BOARD_SIZE][BOARD_SIZE];
 
 	private void clear_board(){
 		int x, y;
 
 		for(y = 0; y < BOARD_SIZE; y++){
 			for(x = 0; x < BOARD_SIZE; x++){
-				cell[x][y] = COLOR_NONE;
+				table[x][y] = COLOR_NONE;
 			}
 		}
 
 		return;
 	}
 
-	private boolean is_valid(int x, int y){
+	private boolean is_range_valid(int x, int y){
 		if(x < 0 || y < 0 || x > BOARD_SIZE - 1 || y > BOARD_SIZE - 1){
 			return false;
 		}
@@ -27,6 +27,23 @@ public class Board {
 		return true;
 	}
 	
+	private boolean put_one(int x, int y, int color){
+		boolean ret = true;
+
+		if(is_range_valid(x, y) == false) {
+			ret = false;
+		}else if((table[x][y] == COLOR_BLACK)||(table[x][y] == COLOR_WHITE)){
+			ret = false;
+		}else{
+			table[x][y] = color;
+		}
+
+		return ret;
+	}
+	
+	/**
+	 *　コンストラクタ
+	 */
 	public Board(){
 		clear_board();
 	}
@@ -34,11 +51,11 @@ public class Board {
 	/**
 	 *　板の上をゲーム開始の状態にする
 	 */
-	public void initBoard(){
+	public void prepareBoard(){
 		clear_board();
 
-		cell[3][3] = cell[4][4] = COLOR_WHITE;	//initial white piece
-		cell[3][4] = cell[4][3] = COLOR_BLACK;	//initial black piece
+		table[3][3] = table[4][4] = COLOR_WHITE;	//initial white piece
+		table[3][4] = table[4][3] = COLOR_BLACK;	//initial black piece
 	}
 
 	public void clearTable(){
@@ -53,17 +70,7 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean putPiece(int x, int y, int color){
-		boolean ret = true;
-
-		if(is_valid(x, y) == false) {
-			ret = false;
-		}else if((cell[x][y] == COLOR_BLACK)||(cell[x][y] == COLOR_WHITE)){
-			ret = false;
-		}else{
-			cell[x][y] = color;
-		}
-
-		return ret;
+		return put_one(x,y,color);
 	}
 
 	/**
@@ -75,10 +82,10 @@ public class Board {
 	public int getVal(int x, int y) {
 		int ret;
 
-		if(is_valid(x, y) == false) {
+		if(is_range_valid(x, y) == false) {
 			ret = -1;
 		}else {
-			ret = cell[x][y];
+			ret = table[x][y];
 		}
 
 		return ret;
@@ -92,7 +99,7 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean isPuttable(int x, int y, int side){
-		if(is_valid(x, y) == false) {
+		if(is_range_valid(x, y) == false) {
 			return false;
 		}else {
 			return true;
@@ -102,7 +109,7 @@ public class Board {
 	/**
 	 *　以下はデバッグ用
 	 */
-	public void show(){
+	public void showBoard(){
 		int x, y;
 
 		System.out.println("  abcdefgh");
@@ -110,7 +117,7 @@ public class Board {
 		for(y = 0; y < BOARD_SIZE; y++){
 			System.out.print(y+1 + "|");
 			for(x = 0; x < BOARD_SIZE; x++){
-				switch(cell[x][y]){
+				switch(table[x][y]){
 				case COLOR_WHITE:
 					System.out.print("o");
 					break;
@@ -132,11 +139,11 @@ public class Board {
 	}
 
 	public boolean isExist(int x, int y) {
-		if(is_valid(x, y) == false) {
+		if(is_range_valid(x, y) == false) {
 			return false;
 		}
 
-		if((cell[x][y] == COLOR_BLACK)||(cell[x][y] == COLOR_WHITE)) {
+		if((table[x][y] == COLOR_BLACK)||(table[x][y] == COLOR_WHITE)) {
 			return true;
 		}else {
 			return false;
@@ -149,7 +156,7 @@ public class Board {
 		
 		for(y = 0; y < BOARD_SIZE; y++){
 			for(x = 0; x < BOARD_SIZE; x++){
-				switch(cell[x][y]) {
+				switch(table[x][y]) {
 				case COLOR_NONE:
 					boardState += "0";
 					break;

@@ -7,7 +7,7 @@ public class GameMaster {
 		Player p1 = PlayerFactory.getPlayer(0, Player.SIDE_BLACK);	
 		Player p2 = PlayerFactory.getPlayer(1, Player.SIDE_WHITE);	
 		
-		bd.initBoard();
+		bd.prepareBoard();
 
 		p1.registBoard(bd);
 		p2.registBoard(bd);

@@ -11,7 +11,7 @@ public class CpuPlayerTest extends TestCase {
 		Board bd = new Board();
 		CpuPlayer cp = new CpuPlayer(Player.SIDE_BLACK);
 		
-		bd.initBoard();
+		bd.prepareBoard();
 		cp.turn(bd);
 		
 	}

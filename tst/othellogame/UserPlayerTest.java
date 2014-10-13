@@ -11,7 +11,7 @@ public class UserPlayerTest extends TestCase {
 		Board bd = new Board();
 		UserPlayer up = new UserPlayer(Player.SIDE_BLACK);
 		
-		bd.initBoard();
+		bd.prepareBoard();
 		up.turn(bd);
 		
 	}

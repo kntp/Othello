@@ -13,7 +13,7 @@ public class GameMasterTest extends TestCase {
 		Player p2 = new CpuPlayer(Player.SIDE_WHITE);
 		GameMaster gm = new GameMaster(); 
 	
-		bd.initBoard();
+		bd.prepareBoard();
 		
 	}
 }

@@ -2,14 +2,26 @@ package othellogame;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class BoardTest {
 
+	private Board bd;
+	
+	@Before
+	public void doBefore() {
+		bd = new Board();
+	}
+
+	@After
+	public void doAfter() {
+	}
+
 	@Test
 	public void testBoardInit(){
-		Board bd = new Board();
 		int x, y;
 
 		for(x = 0; x < 8; x++){
@@ -20,7 +32,7 @@ public class BoardTest {
 
 		bd.putPiece(0, 0, Board.COLOR_BLACK);
 		bd.putPiece(7, 7, Board.COLOR_WHITE);
-		bd.initBoard();
+		bd.prepareBoard();
 		assertEquals(bd.getVal(3, 3),Board.COLOR_WHITE);
 		assertEquals(bd.getVal(4, 4),Board.COLOR_WHITE);
 		assertEquals(bd.getVal(3, 4),Board.COLOR_BLACK);
@@ -32,54 +44,62 @@ public class BoardTest {
 
 	@Test
 	public void testGetval(){
-		Board bd = new Board();
-
 		assertEquals(bd.getVal(-1, -1),-1);
 		assertEquals(bd.getVal(7, 7),Board.COLOR_NONE);
 		assertEquals(bd.getVal(7, 8),-1);
 		assertEquals(bd.getVal(8, 7),-1);
 		assertEquals(bd.getVal(8, 8),-1);
-
 	}
 
-	@Test
-	public void testPutpieces(){
-		Board bd = new Board();
+	private boolean is_allvalid(int color)
+	{
 		int x,y;
+		boolean piece = true;
+		
+		bd.clearTable();
+		
+		for(y = 0; y < Board.BOARD_SIZE; y++){
+			for(x = 0; x < Board.BOARD_SIZE; x++){
+				bd.putPiece(x, y, color);
+				if(bd.getVal(x, y) != color) {
+					piece = false;
+				}
+			}
+		}
+		
+		return piece;
+	}
+	
+	@Test
+	public void testPutPiece(){
 
 		/* put black test */
-		bd.clearTable();
-		for(y = 0; y < Board.BOARD_SIZE; y++){
-			for(x = 0; x < Board.BOARD_SIZE; x++){
-				bd.putPiece(x, y, Board.COLOR_BLACK);
-				assertEquals(bd.getVal(x, y),Board.COLOR_BLACK);
-			}
-		}
+		assertTrue(is_allvalid(Board.COLOR_BLACK));
 		
 		/* put white test*/
-		bd.clearTable();
-		for(y = 0; y < Board.BOARD_SIZE; y++){
-			for(x = 0; x < Board.BOARD_SIZE; x++){
-				assertTrue(bd.putPiece(x, y, Board.COLOR_WHITE));
-				assertEquals(bd.getVal(x, y), Board.COLOR_WHITE);
-			}
-		}
+		assertTrue(is_allvalid(Board.COLOR_WHITE));
 		
 		/* out of range test*/
-		bd.initBoard();
+		bd.prepareBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_BLACK));
 		assertFalse(bd.putPiece(8, 0, Board.COLOR_BLACK));
 
-		bd.initBoard();
+		bd.prepareBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_WHITE));
 		assertFalse(bd.putPiece(8, 0, Board.COLOR_WHITE));
+		
+		/* put fail test */
+		bd.prepareBoard();
+		assertFalse(bd.putPiece(3, 3, Board.COLOR_WHITE));
+		assertFalse(bd.putPiece(3, 4, Board.COLOR_WHITE));
+		assertFalse(bd.putPiece(4, 3, Board.COLOR_WHITE));
+		assertFalse(bd.putPiece(4, 4, Board.COLOR_WHITE));
+
 	}
 
 	@Test
 	public void testIsExist(){
-		Board bd = new Board();
-
-		bd.initBoard();
+		bd.prepareBoard();
 
 		/* test corners */
 		assertFalse(bd.isExist(0, 0));
@@ -124,7 +144,7 @@ public class BoardTest {
 			}
 		}
 		
-		bd.show();
+		bd.showBoard();
 		
 /*		bd.initBoard();
 		assertFalse(bd.isPuttable(0, 0, Board.COLOR_BLACK));
@@ -135,16 +155,13 @@ public class BoardTest {
 	@Ignore
 	@Test
 	public void testShow(){
-		Board bd = new Board();
-
-		bd.show();
-		bd.initBoard();
-		bd.show();
+		bd.showBoard();
+		bd.prepareBoard();
+		bd.showBoard();
 	}
 
 	@Test
 	public void testGetBoardData(){
-		Board bd = new Board();
 		String src = new String();
 		String dst = new String();
 
@@ -177,7 +194,7 @@ public class BoardTest {
 		assertTrue(src.equals(dst));		
 		
 		/* test initial state */
-		bd.initBoard();
+		bd.prepareBoard();
 
 		src =	"00000000" +
 				"00000000" +
