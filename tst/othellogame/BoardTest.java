@@ -134,29 +134,26 @@ public class BoardTest {
 //	@Ignore("not ready yet")
 	@Test
 	public void testIsPuttable(){
-		Board bd = new Board();
 
 		/* clean test */
+		bd.clearTable();
 		for(int y = 0; y < Board.BOARD_SIZE; y++) {
 			for(int x = 0; x < Board.BOARD_SIZE; x++) {
-				assertTrue(bd.isPuttable(x, y, Board.COLOR_BLACK));
-				assertTrue(bd.isPuttable(x, y, Board.COLOR_WHITE));
+				assertFalse(bd.isPuttable(x, y, Board.COLOR_BLACK));
+				assertFalse(bd.isPuttable(x, y, Board.COLOR_WHITE));
 			}
 		}
 		
-		bd.showBoard();
-		
-/*		bd.initBoard();
-		assertFalse(bd.isPuttable(0, 0, Board.COLOR_BLACK));
-		assertFalse(bd.isPuttable(0, 0, Board.COLOR_WHITE));
-*/
-	}
+		/* side way */
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+		bd.putPiece(4, 3, Board.COLOR_BLACK);
+		assertTrue(bd.isPuttable(2, 3, Board.COLOR_BLACK));
 
-	@Ignore
-	@Test
-	public void testShow(){
-		bd.showBoard();
-		bd.prepareBoard();
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+		assertFalse(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+
 		bd.showBoard();
 	}
 

@@ -98,12 +98,62 @@ public class Board {
 	 * @param color 置く石の色
 	 * @return 置ける　true　置けない　false
 	 */
-	public boolean isPuttable(int x, int y, int side){
-		if(is_range_valid(x, y) == false) {
+	public boolean isPuttable(int x, int y, int color){
+		int x_cnt = x;
+		int no;
+		int state = 0;
+		int other_col = oposit_color(color);
+		
+		if(isExist(x, y) == true) {
 			return false;
-		}else {
+		}
+		
+		for(x_cnt = x, no = 0; x_cnt < Board.BOARD_SIZE; x_cnt++){
+			switch(state){
+			case 0:		/* Initial */
+				if(no == 1 && table[x_cnt][y] == other_col) {
+					state = 1;
+				}
+				break;
+			case 1:		/* Find next */
+				if(table[x_cnt][y] == color){
+					state = 2;
+				}else if(table[x_cnt][y] == other_col){
+					state = 1;
+				}else {
+					state = 3;
+				}
+				break;
+			case 2:		/* Can Place */
+			default:
+				break;
+			}
+			no++;
+		}
+		
+		if(state == 2) {
 			return true;
 		}
+
+		return false;
+	}
+
+	private int oposit_color(int color) {
+		int ret_color;
+		
+		switch(color) {
+		case Board.COLOR_BLACK:
+			ret_color = Board.COLOR_WHITE;
+			break;
+		case Board.COLOR_WHITE:
+			ret_color = Board.COLOR_BLACK;
+			break;
+		default:
+			ret_color = Board.COLOR_NONE;
+			break;
+		}
+
+		return ret_color;
 	}
 
 	/**
@@ -112,10 +162,12 @@ public class Board {
 	public void showBoard(){
 		int x, y;
 
-		System.out.println("  abcdefgh");
+//		System.out.println("  abcdefgh");
+		System.out.println("  01234567");
 		System.out.println(" +--------+");
 		for(y = 0; y < BOARD_SIZE; y++){
-			System.out.print(y+1 + "|");
+//			System.out.print(y+1 + "|");
+			System.out.print(y + "|");
 			for(x = 0; x < BOARD_SIZE; x++){
 				switch(table[x][y]){
 				case COLOR_WHITE:
