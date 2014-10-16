@@ -10,7 +10,7 @@ import org.junit.Test;
 public class BoardTest {
 
 	private Board bd;
-	
+
 	@Before
 	public void doBefore() {
 		bd = new Board();
@@ -55,9 +55,9 @@ public class BoardTest {
 	{
 		int x,y;
 		boolean piece = true;
-		
+
 		bd.clearTable();
-		
+
 		for(y = 0; y < Board.BOARD_SIZE; y++){
 			for(x = 0; x < Board.BOARD_SIZE; x++){
 				bd.putPiece(x, y, color);
@@ -66,19 +66,19 @@ public class BoardTest {
 				}
 			}
 		}
-		
+
 		return piece;
 	}
-	
+
 	@Test
 	public void testPutPiece(){
 
 		/* put black test */
 		assertTrue(is_allvalid(Board.COLOR_BLACK));
-		
+
 		/* put white test*/
 		assertTrue(is_allvalid(Board.COLOR_WHITE));
-		
+
 		/* out of range test*/
 		bd.prepareBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_BLACK));
@@ -87,7 +87,7 @@ public class BoardTest {
 		bd.prepareBoard();
 		assertFalse(bd.putPiece(0, 8, Board.COLOR_WHITE));
 		assertFalse(bd.putPiece(8, 0, Board.COLOR_WHITE));
-		
+
 		/* put fail test */
 		bd.prepareBoard();
 		assertFalse(bd.putPiece(3, 3, Board.COLOR_WHITE));
@@ -109,7 +109,7 @@ public class BoardTest {
 
 		/* test out of range */
 		assertFalse(bd.isExist(-1, -1));
-	
+
 		/* test center */
 		assertTrue(bd.isExist(3, 3));
 		assertTrue(bd.isExist(3, 4));
@@ -120,12 +120,12 @@ public class BoardTest {
 		assertFalse(bd.isExist(3, 4));
 		assertFalse(bd.isExist(4, 3));
 		assertFalse(bd.isExist(4, 4));
-		
+
 		/* at random */
 		assertFalse(bd.isExist(5, 1));
 		bd.putPiece(5, 1, Board.COLOR_BLACK);
 		assertTrue(bd.isExist(5, 1));
-		
+
 		assertFalse(bd.isExist(2, 6));
 		bd.putPiece(2, 6, Board.COLOR_WHITE);
 		assertTrue(bd.isExist(2, 6));
@@ -143,17 +143,49 @@ public class BoardTest {
 				assertFalse(bd.isPuttable(x, y, Board.COLOR_WHITE));
 			}
 		}
-		
+
 		/* side way */
+		/* ..Xo*... */
 		bd.clearTable();
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertTrue(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
 
+		/* ..Xo.... */
 		bd.clearTable();
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		assertFalse(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
 
+		/* ..Xooooo */
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+		bd.putPiece(4, 3, Board.COLOR_WHITE);
+		bd.putPiece(5, 3, Board.COLOR_WHITE);
+		bd.putPiece(6, 3, Board.COLOR_WHITE);
+		bd.putPiece(7, 3, Board.COLOR_WHITE);
+		assertFalse(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
+
+		/* ..Xoooo* */
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+		bd.putPiece(4, 3, Board.COLOR_WHITE);
+		bd.putPiece(5, 3, Board.COLOR_WHITE);
+		bd.putPiece(6, 3, Board.COLOR_WHITE);
+		bd.putPiece(7, 3, Board.COLOR_BLACK);
+		assertTrue(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
+
+		/* ..Xooo*o */
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+		bd.putPiece(4, 3, Board.COLOR_WHITE);
+		bd.putPiece(5, 3, Board.COLOR_WHITE);
+		bd.putPiece(6, 3, Board.COLOR_BLACK);
+		bd.putPiece(7, 3, Board.COLOR_WHITE);
+		assertTrue(bd.isPuttable(2, 3, Board.COLOR_BLACK));
 		bd.showBoard();
 	}
 
@@ -174,7 +206,7 @@ public class BoardTest {
 		dst = bd.getBoardData();
 
 		assertTrue(src.equals(dst));
-		
+
 		/* test 1 piece */
 		bd.clearTable();
 		bd.putPiece(0, 0, Board.COLOR_BLACK);
@@ -188,8 +220,8 @@ public class BoardTest {
 				"00000000" +
 				"00000000";
 		dst = bd.getBoardData();
-		assertTrue(src.equals(dst));		
-		
+		assertTrue(src.equals(dst));
+
 		/* test initial state */
 		bd.prepareBoard();
 
@@ -203,7 +235,7 @@ public class BoardTest {
 				"00000000";
 		dst = bd.getBoardData();
 		assertTrue(src.equals(dst));
-		
+
 		/* test 1 piece */
 		bd.clearTable();
 		bd.putPiece(1, 0, Board.COLOR_WHITE);
@@ -217,6 +249,6 @@ public class BoardTest {
 				"00000000" +
 				"00000000";
 		dst = bd.getBoardData();
-		assertTrue(src.equals(dst));		
+		assertTrue(src.equals(dst));
 	}
 }
