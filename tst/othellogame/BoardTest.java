@@ -144,7 +144,7 @@ public class BoardTest {
 			}
 		}
 
-		/* side way */
+		/* E direction */
 		/* ..Xo*... */
 		bd.clearTable();
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
@@ -186,6 +186,16 @@ public class BoardTest {
 		bd.putPiece(6, 3, Board.COLOR_BLACK);
 		bd.putPiece(7, 3, Board.COLOR_WHITE);
 		assertTrue(bd.isPuttable(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
+
+		/* ..Xo.o*o */
+		bd.clearTable();
+		bd.putPiece(3, 3, Board.COLOR_WHITE);
+//		bd.putPiece(4, 3, Board.COLOR_WHITE);
+		bd.putPiece(5, 3, Board.COLOR_WHITE);
+		bd.putPiece(6, 3, Board.COLOR_BLACK);
+		bd.putPiece(7, 3, Board.COLOR_WHITE);
+		assertFalse(bd.isPuttable(2, 3, Board.COLOR_BLACK));
 		bd.showBoard();
 	}
 
