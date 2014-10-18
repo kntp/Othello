@@ -5,6 +5,14 @@ public class Board {
 	public static final int COLOR_BLACK = 1;
 	public static final int COLOR_WHITE = 2;
 	public static final int BOARD_SIZE = 8;
+	private static final int DIRECTION_N = 0;
+	private static final int DIRECTION_NE = 1;
+	private static final int DIRECTION_E = 2;
+	private static final int DIRECTION_SE = 3;
+	private static final int DIRECTION_S = 4;
+	private static final int DIRECTION_SW = 5;
+	private static final int DIRECTION_W = 6;
+	private static final int DIRECTION_NW = 7;
 	private int[][] table = new int[BOARD_SIZE][BOARD_SIZE];
 
 	private void clear_board(){
@@ -99,46 +107,92 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean isPuttable(int x, int y, int color){
-		int x_cnt = x;
-		int no;
-		int state = 0;
-		int other_col = oposit_color(color);
-		
+
 		if(isExist(x, y) == true) {
 			return false;
 		}
 		
-		for(x_cnt = x, no = 0; x_cnt < Board.BOARD_SIZE; x_cnt++){
-			switch(state){
-			case 0:		/* Initial */
-				if(no == 1 && table[x_cnt][y] == other_col) {
-					state = 1;
-				}
-				break;
-			case 1:		/* Find next */
-				if(table[x_cnt][y] == color){
-					state = 2;
-				}else if(table[x_cnt][y] == other_col){
-					state = 1;
-				}else {
-					state = 3;
-				}
-				break;
-			case 2:		/* Can Place */
-			default:
-				break;
-			}
-			no++;
-		}
-		
-		if(state == 2) {
+		if((dirCheck(x, y, color, DIRECTION_N)==true)||
+			(dirCheck(x, y, color, DIRECTION_E)==true)||
+			(dirCheck(x, y, color, DIRECTION_W)==true)||
+			(dirCheck(x, y, color, DIRECTION_S)==true)) {
 			return true;
 		}
 
 		return false;
 	}
 
-	private int oposit_color(int color) {
+	private boolean dirCheck(int x, int y, int color, int direction) {
+		final int STATE_INITIAL = 0;
+		final int STATE_FINDNEXT = 1;
+		final int STATE_CANPLACE = 2;
+		final int STATE_CANNOTPLACE = 3;
+		int max_cnt, x_step, y_step;
+		int state = STATE_INITIAL;
+		
+		switch (direction) {
+		case DIRECTION_E:
+			max_cnt = Board.BOARD_SIZE - x;
+			x_step = 1;
+			y_step = 0;
+			break;
+		case DIRECTION_W:
+			max_cnt = x + 1;
+			x_step = -1;
+			y_step = 0;
+			break;
+		case DIRECTION_S:
+			max_cnt = Board.BOARD_SIZE - y;
+			x_step = 0;
+			y_step = 1;
+			break;
+		case DIRECTION_N:
+			max_cnt = y + 1;
+			x_step = 0;
+			y_step = -1;
+			break;
+
+		default:
+			max_cnt = Board.BOARD_SIZE - x;
+			x_step = 1;
+			y_step = 1;
+			break;
+		}
+		
+		/* search pieces in the line while moving state */
+		int cur_x_pos = x;
+		int cur_y_pos = y;
+		for(int cnt = 0; cnt < max_cnt; cnt++){
+			switch(state){
+			case STATE_INITIAL:	
+				if(cnt == 1 && table[cur_x_pos][cur_y_pos] == oposite_color(color)) {
+					state = STATE_FINDNEXT;
+				}
+				break;
+			case STATE_FINDNEXT:
+				if(table[cur_x_pos][cur_y_pos] == color){
+					state = STATE_CANPLACE;
+				}else if(table[cur_x_pos][cur_y_pos] == oposite_color(color)){
+					state = STATE_FINDNEXT;
+				}else {
+					state = STATE_CANNOTPLACE;
+				}
+				break;
+			case STATE_CANPLACE:
+			default:
+				break;
+			}
+			cur_x_pos += x_step;
+			cur_y_pos += y_step;
+		}
+		
+		if(state == STATE_CANPLACE) {
+			return true;
+		}
+		return false;
+	}
+
+	private int oposite_color(int color) {
 		int ret_color;
 		
 		switch(color) {
@@ -190,6 +244,12 @@ public class Board {
 		System.out.println("\n");
 	}
 
+	/**
+	 * その場所に石が置かれているか調べる
+	 * @param x x軸
+	 * @param y y軸
+	 * @return true 石がある false 石がない
+	 */
 	public boolean isExist(int x, int y) {
 		if(is_range_valid(x, y) == false) {
 			return false;
