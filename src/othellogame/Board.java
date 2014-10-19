@@ -219,7 +219,7 @@ public class Board {
 		return false;
 	}
 
-	private int oposite_color(int color) {
+	private static int oposite_color(int color) {
 		int ret_color;
 		
 		switch(color) {
