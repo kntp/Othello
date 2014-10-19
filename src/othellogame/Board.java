@@ -1,10 +1,12 @@
 package othellogame;
 
 public class Board {
+	/* piece color */
 	public static final int COLOR_NONE = 0;
 	public static final int COLOR_BLACK = 1;
 	public static final int COLOR_WHITE = 2;
 	public static final int BOARD_SIZE = 8;
+	/* search direction */
 	private static final int DIRECTION_N = 0;
 	private static final int DIRECTION_NE = 1;
 	private static final int DIRECTION_E = 2;
@@ -13,6 +15,7 @@ public class Board {
 	private static final int DIRECTION_SW = 5;
 	private static final int DIRECTION_W = 6;
 	private static final int DIRECTION_NW = 7;
+	/* table on board */
 	private int[][] table = new int[BOARD_SIZE][BOARD_SIZE];
 
 	private void clear_board(){
@@ -115,7 +118,11 @@ public class Board {
 		if((dirCheck(x, y, color, DIRECTION_N)==true)||
 			(dirCheck(x, y, color, DIRECTION_E)==true)||
 			(dirCheck(x, y, color, DIRECTION_W)==true)||
-			(dirCheck(x, y, color, DIRECTION_S)==true)) {
+			(dirCheck(x, y, color, DIRECTION_S)==true)||
+			(dirCheck(x, y, color, DIRECTION_SE)==true)||
+			(dirCheck(x, y, color, DIRECTION_SW)==true)||
+			(dirCheck(x, y, color, DIRECTION_NW)==true)||
+			(dirCheck(x, y, color, DIRECTION_NE)==true)){
 			return true;
 		}
 
@@ -130,9 +137,10 @@ public class Board {
 		int max_cnt, x_step, y_step;
 		int state = STATE_INITIAL;
 		
+		/* decide check range */
 		switch (direction) {
 		case DIRECTION_E:
-			max_cnt = Board.BOARD_SIZE - x;
+			max_cnt = BOARD_SIZE - x;
 			x_step = 1;
 			y_step = 0;
 			break;
@@ -142,7 +150,7 @@ public class Board {
 			y_step = 0;
 			break;
 		case DIRECTION_S:
-			max_cnt = Board.BOARD_SIZE - y;
+			max_cnt = BOARD_SIZE - y;
 			x_step = 0;
 			y_step = 1;
 			break;
@@ -151,11 +159,30 @@ public class Board {
 			x_step = 0;
 			y_step = -1;
 			break;
-
-		default:
-			max_cnt = Board.BOARD_SIZE - x;
+		case DIRECTION_SE:
+			max_cnt = Math.min(BOARD_SIZE - x, BOARD_SIZE - y);
 			x_step = 1;
 			y_step = 1;
+			break;
+		case DIRECTION_SW:
+			max_cnt = Math.min(x + 1, BOARD_SIZE - y);
+			x_step = -1;
+			y_step = 1;
+			break;
+		case DIRECTION_NW:
+			max_cnt = Math.min(x + 1, y + 1);
+			x_step = -1;
+			y_step = -1;
+			break;
+		case DIRECTION_NE:
+			max_cnt = Math.min(BOARD_SIZE - x, y + 1);
+			x_step = 1;
+			y_step = -1;
+			break;
+		default:
+			max_cnt = 0;
+			x_step = 0;
+			y_step = 0;
 			break;
 		}
 		
