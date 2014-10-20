@@ -6,6 +6,7 @@ public class Board {
 	public static final int COLOR_BLACK = 1;
 	public static final int COLOR_WHITE = 2;
 	public static final int BOARD_SIZE = 8;
+	public static final int NUM_OF_CELLS = BOARD_SIZE * BOARD_SIZE;
 	/* search direction */
 	private static final int DIRECTION_N = 0;
 	private static final int DIRECTION_NE = 1;
@@ -85,12 +86,26 @@ public class Board {
 	}
 
 	/**
+	 * @param x
+	 * @param y
+	 * @param color
+	 * @return
+	 */
+	public boolean putPieceAndTurn(int x, int y, int color){
+		return put_one(x,y,color);
+	}
+
+	/**
 	 *　値を調べる
 	 * @param x x座標
 	 * @param y y座標
 	 * @return 値
 	 */
 	public int getVal(int x, int y) {
+		return get_val(x, y);
+	}
+
+	private int get_val(int x, int y) {
 		int ret;
 
 		if(is_range_valid(x, y) == false) {
@@ -110,8 +125,11 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean isPuttable(int x, int y, int color){
+		return is_puttable(x, y, color);
+	}
 
-		if(isExist(x, y) == true) {
+	private boolean is_puttable(int x, int y, int color) {
+		if(is_exist(x, y) == true) {
 			return false;
 		}
 		
@@ -278,6 +296,10 @@ public class Board {
 	 * @return true 石がある false 石がない
 	 */
 	public boolean isExist(int x, int y) {
+		return is_exist(x, y);
+	}
+
+	private boolean is_exist(int x, int y) {
 		if(is_range_valid(x, y) == false) {
 			return false;
 		}
@@ -314,4 +336,12 @@ public class Board {
 		
 		return boardState;
 	}
+
+	public boolean setBoardData(String src) {
+		if(src.length() != NUM_OF_CELLS){
+			return false;
+		}
+		return true;
+	}
 }
+

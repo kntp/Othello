@@ -427,6 +427,40 @@ public class BoardTest {
 	}
 	
 	@Test
+	public void testPutPieceAndTurn(){
+		bd.clearTable();
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testSetBoardData(){
+		String src = new String();
+		
+		bd.clearTable();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"0000000";
+		assertFalse(bd.setBoardData(src));
+		
+		bd.clearTable();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertTrue(bd.setBoardData(src));
+		
+	}
+
+	@Test
 	public void testGetBoardData(){
 		String src = new String();
 		String dst = new String();
