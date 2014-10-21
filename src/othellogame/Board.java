@@ -124,11 +124,11 @@ public class Board {
 	 * @param color 置く石の色
 	 * @return 置ける　true　置けない　false
 	 */
-	public boolean isPuttable(int x, int y, int color){
-		return is_puttable(x, y, color);
+	public boolean canPut(int x, int y, int color){
+		return can_put(x, y, color);
 	}
 
-	private boolean is_puttable(int x, int y, int color) {
+	private boolean can_put(int x, int y, int color) {
 		if(is_exist(x, y) == true) {
 			return false;
 		}
@@ -341,6 +341,14 @@ public class Board {
 		if(src.length() != NUM_OF_CELLS){
 			return false;
 		}
+		
+		int x, y;
+		for(y = 0; y < BOARD_SIZE; y++){
+			for(x = 0; x < BOARD_SIZE; x++){
+				table[x][y] = Integer.parseInt("" + src.charAt(y * BOARD_SIZE + x));
+			}
+		}
+
 		return true;
 	}
 }
