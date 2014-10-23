@@ -150,13 +150,13 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xo.... */
 		bd.clearTable();
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xooooo */
 		bd.clearTable();
@@ -166,7 +166,7 @@ public class BoardTest {
 		bd.putPiece(6, 3, Board.COLOR_WHITE);
 		bd.putPiece(7, 3, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xoooo* */
 		bd.clearTable();
@@ -176,7 +176,7 @@ public class BoardTest {
 		bd.putPiece(6, 3, Board.COLOR_WHITE);
 		bd.putPiece(7, 3, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xooo*o */
 		bd.clearTable();
@@ -186,7 +186,7 @@ public class BoardTest {
 		bd.putPiece(6, 3, Board.COLOR_BLACK);
 		bd.putPiece(7, 3, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xo.o*o */
 		bd.clearTable();
@@ -196,21 +196,21 @@ public class BoardTest {
 		bd.putPiece(6, 3, Board.COLOR_BLACK);
 		bd.putPiece(7, 3, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* W direction */
 		/* ....*X.. */
 		bd.clearTable();
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ...o*X.. */
 		bd.clearTable();
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* o****X.. */
 		bd.clearTable();
@@ -220,7 +220,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *****X.. */
 		bd.clearTable();
@@ -230,7 +230,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *o***X.. */
 		bd.clearTable();
@@ -240,7 +240,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *o*.*X.. */
 		bd.clearTable();
@@ -250,7 +250,7 @@ public class BoardTest {
 //		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(4, 3, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(5, 3, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 	}
 
@@ -263,7 +263,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(3, 4, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(3, 2, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xooo*o */
 		bd.clearTable();
@@ -273,7 +273,7 @@ public class BoardTest {
 		bd.putPiece(3, 6, Board.COLOR_BLACK);
 		bd.putPiece(3, 7, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(3, 2, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* ..Xo.o*o */
 		bd.clearTable();
@@ -283,7 +283,7 @@ public class BoardTest {
 		bd.putPiece(3, 6, Board.COLOR_BLACK);
 		bd.putPiece(3, 7, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(3, 2, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* N direction */
 		/* ...o*X.. */
@@ -291,7 +291,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(3, 4, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(3, 5, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *****X.. */
 		bd.clearTable();
@@ -301,7 +301,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(3, 4, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(3, 5, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *o*.*X.. */
 		bd.clearTable();
@@ -311,7 +311,7 @@ public class BoardTest {
 //		bd.putPiece(3, 3, Board.COLOR_BLACK);
 		bd.putPiece(3, 4, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(3, 5, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 	}
 	
@@ -324,7 +324,7 @@ public class BoardTest {
 		bd.putPiece(3, 3, Board.COLOR_WHITE);
 		bd.putPiece(4, 4, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(2, 2, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* Xoo*o */
 		bd.clearTable();
@@ -333,7 +333,7 @@ public class BoardTest {
 		bd.putPiece(3, 6, Board.COLOR_BLACK);
 		bd.putPiece(4, 7, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(0, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* Xoo.o */
 		bd.clearTable();
@@ -342,7 +342,7 @@ public class BoardTest {
 //		bd.putPiece(3, 6, Board.COLOR_BLACK);
 		bd.putPiece(4, 7, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(0, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* SW direction */
 		/* ...o*X.. */
@@ -350,7 +350,7 @@ public class BoardTest {
 		bd.putPiece(4, 1, Board.COLOR_BLACK);
 		bd.putPiece(3, 2, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(5, 0, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *****X.. */
 		bd.clearTable();
@@ -360,7 +360,7 @@ public class BoardTest {
 		bd.putPiece(1, 4, Board.COLOR_BLACK);
 		bd.putPiece(0, 5, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(5, 0, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* o.***X.. */
 		bd.clearTable();
@@ -370,7 +370,7 @@ public class BoardTest {
 //		bd.putPiece(1, 4, Board.COLOR_BLACK);
 		bd.putPiece(0, 5, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(5, 0, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* NW direction */
 		/* ..Xo*... */
@@ -378,7 +378,7 @@ public class BoardTest {
 		bd.putPiece(6, 2, Board.COLOR_WHITE);
 		bd.putPiece(5, 1, Board.COLOR_BLACK);
 		assertTrue(bd.canPut(7, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* Xo*o */
 		bd.clearTable();
@@ -386,7 +386,7 @@ public class BoardTest {
 		bd.putPiece(5, 1, Board.COLOR_BLACK);
 		bd.putPiece(4, 0, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(7, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* Xoo. */
 		bd.clearTable();
@@ -394,7 +394,7 @@ public class BoardTest {
 		bd.putPiece(5, 1, Board.COLOR_WHITE);
 //		bd.putPiece(4, 0, Board.COLOR_WHITE);
 		assertFalse(bd.canPut(7, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* NE direction */
 		/* .o*X... */
@@ -402,7 +402,7 @@ public class BoardTest {
 		bd.putPiece(3, 5, Board.COLOR_BLACK);
 		bd.putPiece(4, 4, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(2, 6, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* *****X.. */
 		bd.clearTable();
@@ -412,7 +412,7 @@ public class BoardTest {
 		bd.putPiece(6, 2, Board.COLOR_BLACK);
 		bd.putPiece(7, 1, Board.COLOR_BLACK);
 		assertFalse(bd.canPut(2, 6, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 		/* o****X.. */
 		bd.clearTable();
@@ -422,14 +422,51 @@ public class BoardTest {
 		bd.putPiece(6, 2, Board.COLOR_BLACK);
 		bd.putPiece(7, 1, Board.COLOR_WHITE);
 		assertTrue(bd.canPut(2, 6, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 
 	}
 	
 	@Test
-	public void testPutPieceAndTurn(){
+	public void testPutAndTurn(){
+		String src = new String();
+		String dst = new String();
+
 		bd.clearTable();
-		assertTrue(true);
+		bd.prepareBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00021000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+
+		assertTrue(bd.putAndTurn(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00111000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+		
+		assertTrue(bd.putAndTurn(2, 2, Board.COLOR_WHITE));
+		bd.showBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00200000" +
+				"00121000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+		
 	}
 	
 	@Test
@@ -499,67 +536,5 @@ public class BoardTest {
 		assertEquals(Board.COLOR_BLACK, bd.getVal(3, 4));
 		
 	}
-
-	@Test
-	public void testGetBoardData(){
-		String src = new String();
-		String dst = new String();
-
-		/* test clear state */
-		src =	"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		dst = bd.getBoardData();
-
-		assertTrue(src.equals(dst));
-
-		/* test 1 piece */
-		bd.clearTable();
-		bd.putPiece(0, 0, Board.COLOR_BLACK);
-
-		src =	"10000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		dst = bd.getBoardData();
-		assertTrue(src.equals(dst));
-
-		/* test initial state */
-		bd.prepareBoard();
-
-		src =	"00000000" +
-				"00000000" +
-				"00000000" +
-				"00021000" +
-				"00012000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		dst = bd.getBoardData();
-		assertTrue(src.equals(dst));
-
-		/* test 1 piece */
-		bd.clearTable();
-		bd.putPiece(1, 0, Board.COLOR_WHITE);
-
-		src =	"02000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		dst = bd.getBoardData();
-		assertTrue(src.equals(dst));
-	}
+	
 }

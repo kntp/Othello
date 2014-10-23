@@ -91,7 +91,11 @@ public class Board {
 	 * @param color
 	 * @return
 	 */
-	public boolean putPieceAndTurn(int x, int y, int color){
+	public boolean putAndTurn(int x, int y, int color){
+		if(can_put(x, y, color, true) != true) {
+			return false;
+		}
+		
 		return put_one(x,y,color);
 	}
 
@@ -125,29 +129,29 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean canPut(int x, int y, int color){
-		return can_put(x, y, color);
+		return can_put(x, y, color, false);
 	}
 
-	private boolean can_put(int x, int y, int color) {
+	private boolean can_put(int x, int y, int color, boolean turn) {
 		if(is_exist(x, y) == true) {
 			return false;
 		}
 		
-		if((dirCheck(x, y, color, DIRECTION_N)==true)||
-			(dirCheck(x, y, color, DIRECTION_E)==true)||
-			(dirCheck(x, y, color, DIRECTION_W)==true)||
-			(dirCheck(x, y, color, DIRECTION_S)==true)||
-			(dirCheck(x, y, color, DIRECTION_SE)==true)||
-			(dirCheck(x, y, color, DIRECTION_SW)==true)||
-			(dirCheck(x, y, color, DIRECTION_NW)==true)||
-			(dirCheck(x, y, color, DIRECTION_NE)==true)){
+		if((dirCheck(x, y, color, DIRECTION_N, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_E, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_W, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_S, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_SE, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_SW, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_NW, turn)==true)||
+			(dirCheck(x, y, color, DIRECTION_NE, turn)==true)){
 			return true;
 		}
 
 		return false;
 	}
 
-	private boolean dirCheck(int x, int y, int color, int direction) {
+	private boolean dirCheck(int x, int y, int color, int direction, boolean turn) {
 		final int STATE_INITIAL = 0;
 		final int STATE_FINDNEXT = 1;
 		final int STATE_CANPLACE = 2;
@@ -212,6 +216,9 @@ public class Board {
 			case STATE_INITIAL:	
 				if(cnt == 1 && table[cur_x_pos][cur_y_pos] == oposite_color(color)) {
 					state = STATE_FINDNEXT;
+					if(turn == true){
+						table[cur_x_pos][cur_y_pos] = color;
+					}
 				}
 				break;
 			case STATE_FINDNEXT:
@@ -219,6 +226,9 @@ public class Board {
 					state = STATE_CANPLACE;
 				}else if(table[cur_x_pos][cur_y_pos] == oposite_color(color)){
 					state = STATE_FINDNEXT;
+					if(turn == true){
+						table[cur_x_pos][cur_y_pos] = color;
+					}
 				}else {
 					state = STATE_CANNOTPLACE;
 				}
