@@ -7,6 +7,7 @@ public class Board {
 	public static final int COLOR_WHITE = 2;
 	public static final int BOARD_SIZE = 8;
 	public static final int NUM_OF_CELLS = BOARD_SIZE * BOARD_SIZE;
+	public static final int NUM_OF_DIRS = 8;
 	/* search direction */
 	private static final int DIRECTION_N = 0;
 	private static final int DIRECTION_NE = 1;
@@ -18,6 +19,7 @@ public class Board {
 	private static final int DIRECTION_NW = 7;
 	/* table on board */
 	private int[][] table = new int[BOARD_SIZE][BOARD_SIZE];
+	private int[] dir_table = new int[NUM_OF_DIRS];
 
 	private void clear_board(){
 		int x, y;
@@ -28,6 +30,19 @@ public class Board {
 			}
 		}
 
+		return;
+	}
+
+	private void set_dir_table() {
+		dir_table[0] = DIRECTION_N;
+		dir_table[1] = DIRECTION_NE;
+		dir_table[2] = DIRECTION_E;
+		dir_table[3] = DIRECTION_SE;
+		dir_table[4] = DIRECTION_S;
+		dir_table[5] = DIRECTION_SW;
+		dir_table[6] = DIRECTION_W;
+		dir_table[7] = DIRECTION_NW;
+		
 		return;
 	}
 
@@ -58,6 +73,7 @@ public class Board {
 	 */
 	public Board(){
 		clear_board();
+		set_dir_table();
 	}
 
 	/**
@@ -92,11 +108,25 @@ public class Board {
 	 * @return
 	 */
 	public boolean putAndTurn(int x, int y, int color){
-		if(can_put(x, y, color, true) != true) {
+		if(is_exist(x, y) == true) {
 			return false;
 		}
 		
-		return put_one(x,y,color);
+		boolean result = true;
+		for(int dir = 0;dir < NUM_OF_DIRS; dir++ ){
+			if(check_dir(x, y, color, dir_table[dir], false)==true){
+				if(check_dir(x, y, color, dir_table[dir], true)==false){
+					result = false;
+				}
+			}
+		}
+
+		if(result == true){
+			return put_one(x,y,color);
+		}else{
+			return false;
+		}
+		
 	}
 
 	/**
@@ -129,29 +159,25 @@ public class Board {
 	 * @return 置ける　true　置けない　false
 	 */
 	public boolean canPut(int x, int y, int color){
-		return can_put(x, y, color, false);
+		return can_put(x, y, color);
 	}
 
-	private boolean can_put(int x, int y, int color, boolean turn) {
+	private boolean can_put(int x, int y, int color) {
 		if(is_exist(x, y) == true) {
 			return false;
 		}
 		
-		if((dirCheck(x, y, color, DIRECTION_N, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_E, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_W, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_S, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_SE, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_SW, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_NW, turn)==true)||
-			(dirCheck(x, y, color, DIRECTION_NE, turn)==true)){
-			return true;
+		boolean result = false;
+		for(int dir = 0;dir < NUM_OF_DIRS; dir++ ){
+			if(check_dir(x, y, color, dir_table[dir], false)==true){
+				result = true;
+			}
 		}
 
-		return false;
+		return result;
 	}
 
-	private boolean dirCheck(int x, int y, int color, int direction, boolean turn) {
+	private boolean check_dir(int x, int y, int color, int direction, boolean turn) {
 		final int STATE_INITIAL = 0;
 		final int STATE_FINDNEXT = 1;
 		final int STATE_CANPLACE = 2;
@@ -214,7 +240,7 @@ public class Board {
 		for(int cnt = 0; cnt < max_cnt; cnt++){
 			switch(state){
 			case STATE_INITIAL:	
-				if(cnt == 1 && table[cur_x_pos][cur_y_pos] == oposite_color(color)) {
+				if(cnt == 1 && table[cur_x_pos][cur_y_pos] == opposite_color(color)) {
 					state = STATE_FINDNEXT;
 					if(turn == true){
 						table[cur_x_pos][cur_y_pos] = color;
@@ -224,7 +250,7 @@ public class Board {
 			case STATE_FINDNEXT:
 				if(table[cur_x_pos][cur_y_pos] == color){
 					state = STATE_CANPLACE;
-				}else if(table[cur_x_pos][cur_y_pos] == oposite_color(color)){
+				}else if(table[cur_x_pos][cur_y_pos] == opposite_color(color)){
 					state = STATE_FINDNEXT;
 					if(turn == true){
 						table[cur_x_pos][cur_y_pos] = color;
@@ -247,7 +273,7 @@ public class Board {
 		return false;
 	}
 
-	private static int oposite_color(int color) {
+	private static int opposite_color(int color) {
 		int ret_color;
 		
 		switch(color) {

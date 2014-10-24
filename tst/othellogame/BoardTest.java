@@ -427,49 +427,6 @@ public class BoardTest {
 	}
 	
 	@Test
-	public void testPutAndTurn(){
-		String src = new String();
-		String dst = new String();
-
-		bd.clearTable();
-		bd.prepareBoard();
-		src =	"00000000" +
-				"00000000" +
-				"00000000" +
-				"00021000" +
-				"00012000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		assertEquals(src, bd.getBoardData());
-
-		assertTrue(bd.putAndTurn(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
-		src =	"00000000" +
-				"00000000" +
-				"00000000" +
-				"00111000" +
-				"00012000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		assertEquals(src, bd.getBoardData());
-		
-		assertTrue(bd.putAndTurn(2, 2, Board.COLOR_WHITE));
-		bd.showBoard();
-		src =	"00000000" +
-				"00000000" +
-				"00200000" +
-				"00121000" +
-				"00012000" +
-				"00000000" +
-				"00000000" +
-				"00000000";
-		assertEquals(src, bd.getBoardData());
-		
-	}
-	
-	@Test
 	public void testSetBoardData(){
 		String src = new String();
 		
@@ -534,6 +491,61 @@ public class BoardTest {
 		assertEquals(Board.COLOR_BLACK, bd.getVal(5, 3));
 		assertEquals(Board.COLOR_BLACK, bd.getVal(1, 4));
 		assertEquals(Board.COLOR_BLACK, bd.getVal(3, 4));
+		
+	}
+	
+	@Test
+	public void testPutAndTurn(){
+		String src = new String();
+		String dst = new String();
+
+		bd.clearTable();
+		bd.prepareBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00021000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+
+		assertTrue(bd.putAndTurn(2, 3, Board.COLOR_BLACK));
+		bd.showBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00000000" +
+				"00111000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+		
+		assertTrue(bd.putAndTurn(2, 2, Board.COLOR_WHITE));
+		bd.showBoard();
+		src =	"00000000" +
+				"00000000" +
+				"00200000" +
+				"00121000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
+		
+		assertTrue(bd.putAndTurn(2, 1, Board.COLOR_BLACK));
+		bd.showBoard();
+		src =	"00000000" +
+				"00100000" +
+				"00100000" +
+				"00121000" +
+				"00012000" +
+				"00000000" +
+				"00000000" +
+				"00000000";
+		assertEquals(src, bd.getBoardData());
 		
 	}
 	
