@@ -497,7 +497,6 @@ public class BoardTest {
 	@Test
 	public void testPutAndTurn(){
 		String src = new String();
-		String dst = new String();
 
 		bd.clearTable();
 		bd.prepareBoard();
@@ -512,7 +511,7 @@ public class BoardTest {
 		assertEquals(src, bd.getBoardData());
 
 		assertTrue(bd.putAndTurn(2, 3, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 		src =	"00000000" +
 				"00000000" +
 				"00000000" +
@@ -524,7 +523,7 @@ public class BoardTest {
 		assertEquals(src, bd.getBoardData());
 		
 		assertTrue(bd.putAndTurn(2, 2, Board.COLOR_WHITE));
-		bd.showBoard();
+//		bd.showBoard();
 		src =	"00000000" +
 				"00000000" +
 				"00200000" +
@@ -536,7 +535,7 @@ public class BoardTest {
 		assertEquals(src, bd.getBoardData());
 		
 		assertTrue(bd.putAndTurn(2, 1, Board.COLOR_BLACK));
-		bd.showBoard();
+//		bd.showBoard();
 		src =	"00000000" +
 				"00100000" +
 				"00100000" +
@@ -549,4 +548,74 @@ public class BoardTest {
 		
 	}
 	
+	@Test
+	public void testPutAndTurn2(){
+		String score = "F5D6C5F4D7C6C7F6D3B5C4C3E6B6A6A4A5A7G5B3F7B4F3E3E2E8C8G4H3D2G3E1B2E7A2H6D8B8F2F8G7G6G8H8H7H5D1F1G1C1B1C2A3A1H4H2B7G2H1";
+		repeat_score(score);
+	
+	}
+
+	private void repeat_score(String score) {
+		int cur_turn = Board.COLOR_BLACK;
+		
+		bd.clearTable();
+		bd.prepareBoard();
+		
+		int cur_x,cur_y;
+		for(int cnt = 0; cnt < (score.length()/2); cnt++){
+			cur_x = convert_index(score.charAt(cnt * 2));
+			cur_y = convert_index(score.charAt(cnt * 2 + 1));
+			assertTrue(bd.putAndTurn(cur_x, cur_y, cur_turn));
+			if(cur_turn == Board.COLOR_BLACK){
+				cur_turn = Board.COLOR_WHITE;
+			}else{
+				cur_turn = Board.COLOR_BLACK;
+			}
+			bd.showBoard();
+		}
+	}
+
+	private int convert_index(char cur_char) {
+		int ret_index = 0;
+		
+		switch(cur_char) {
+		case '1':
+		case 'A':
+			ret_index = 0;
+			break;
+		case '2':
+		case 'B':
+			ret_index = 1;
+			break;
+		case '3':
+		case 'C':
+			ret_index = 2;
+			break;
+		case '4':
+		case 'D':
+			ret_index = 3;
+			break;
+		case '5':
+		case 'E':
+			ret_index = 4;
+			break;
+		case '6':
+		case 'F':
+			ret_index = 5;
+			break;
+		case '7':
+		case 'G':
+			ret_index = 6;
+			break;
+		case '8':
+		case 'H':
+			ret_index = 7;
+			break;
+		default:
+			assert(false);
+			break;
+		}
+		
+		return ret_index;
+	}
 }
