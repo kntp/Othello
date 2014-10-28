@@ -551,11 +551,15 @@ public class BoardTest {
 	@Test
 	public void testPutAndTurn2(){
 		String score = "F5D6C5F4D7C6C7F6D3B5C4C3E6B6A6A4A5A7G5B3F7B4F3E3E2E8C8G4H3D2G3E1B2E7A2H6D8B8F2F8G7G6G8H8H7H5D1F1G1C1B1C2A3A1H4H2B7G2H1";
-		repeat_score(score);
+		repeat_score(score,false);
+		score = "F5F6E6F4E3C5C4E7C6E2F2D2F3G4G5D6D7H5G3D3C3C2H6H4D1H7F8F1E1H3G1D8B3C8G2C7F7G6E8G8B7B8H2H1G7A8B6A5A7A6B5A4B4";
+		repeat_score(score,false);
+		score = "F5D6C5F4E3C6D3F6E6D7E7C3C4C7D8C8F7F8B8D2B6F3C2E8G8B3G5B4A3A5D1E2E1B5A6A4G4B7A8A7B2G6H5A1A2B1C1H7G7F1F2H3H4G1H2G3G2H1H6H8";
+		repeat_score(score, true);
 	
 	}
 
-	private void repeat_score(String score) {
+	private void repeat_score(String score, boolean show) {
 		int cur_turn = Board.COLOR_BLACK;
 		
 		bd.clearTable();
@@ -571,7 +575,9 @@ public class BoardTest {
 			}else{
 				cur_turn = Board.COLOR_BLACK;
 			}
-			bd.showBoard();
+			if(show == true){
+				bd.showBoard();
+			}
 		}
 	}
 
