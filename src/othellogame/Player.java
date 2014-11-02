@@ -9,7 +9,7 @@ public abstract class Player {
 	public Player(int side){
 		this.pside = side;
 	}
-	public abstract boolean turn(Board bd);
+	public abstract boolean turn();
 	
 	public void registBoard(Board bd){
 		this.bd = bd;

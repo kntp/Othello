@@ -6,7 +6,7 @@ public class CpuPlayer extends Player {
 		super(type);
 	}
 	@Override
-	public boolean turn(Board bd) {
+	public boolean turn() {
 		// TODO 
 		return false;
 	}

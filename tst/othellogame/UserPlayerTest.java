@@ -12,7 +12,7 @@ public class UserPlayerTest extends TestCase {
 		UserPlayer up = new UserPlayer(Player.SIDE_BLACK);
 		
 		bd.prepareBoard();
-		up.turn(bd);
+		up.turn();
 		
 	}
 }

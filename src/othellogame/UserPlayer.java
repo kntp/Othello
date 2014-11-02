@@ -6,7 +6,7 @@ public class UserPlayer extends Player {
 	}
 
 	@Override
-	public boolean turn(Board bd) {
+	public boolean turn() {
 		// TODO 		
 		return false;
 	}
