@@ -27,4 +27,17 @@ public class GameMaster {
 			end_game = true;
 		}
 	}
+	public static int stoneColor(int pside) {
+		int stone_color;
+		
+		if(pside == Player.SIDE_BLACK){
+			stone_color = Board.COLOR_BLACK;
+		}else if(pside == Player.SIDE_WHITE){
+			stone_color = Board.COLOR_WHITE;
+		}else {
+			stone_color = Board.COLOR_NONE;
+		}
+		
+		return stone_color;
+	}
 }

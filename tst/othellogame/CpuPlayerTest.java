@@ -2,6 +2,8 @@ package othellogame;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -9,15 +11,32 @@ import junit.framework.TestCase;
 
 public class CpuPlayerTest {
 
+	private Board bd;
+
+	@Before
+	public void doBefore() {
+		bd = new Board();
+	}
+
+	@After
+	public void doAfter() {
+	}
+
 	@Test
 	public void testTurn(){
-		assertTrue(true);
+		CpuPlayer cp1 = new CpuPlayer(Player.SIDE_BLACK);
+
+		cp1.registBoard(bd);
+		
+		bd.prepareBoard();
+		
+		assertTrue(cp1.turn());
+		
 	}
 	
 	@Ignore("not yet")
 	@Test
 	public void testCP(){
-		Board bd = new Board();
 		CpuPlayer cp1 = new CpuPlayer(Player.SIDE_BLACK);
 		CpuPlayer cp2 = new CpuPlayer(Player.SIDE_WHITE);
 		boolean res = true, res1, res2;

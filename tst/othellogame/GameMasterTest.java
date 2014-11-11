@@ -1,10 +1,12 @@
 package othellogame;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
 
-public class GameMasterTest extends TestCase {
+public class GameMasterTest{
 
 	@Test
 	public void testGM(){
