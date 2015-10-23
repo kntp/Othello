@@ -2,12 +2,12 @@ package othellogame;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 public class GameMasterTest{
 
+	@Ignore("not yet")
 	@Test
 	public void testGM(){
 		Player p1 = new UserPlayer(Player.SIDE_BLACK);

@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 public class CpuPlayerTest {
 
 	private Board bd;
@@ -34,7 +32,7 @@ public class CpuPlayerTest {
 		
 	}
 	
-	@Ignore("not yet")
+//	@Ignore("not yet")
 	@Test
 	public void testCP(){
 		CpuPlayer cp1 = new CpuPlayer(Player.SIDE_BLACK);
